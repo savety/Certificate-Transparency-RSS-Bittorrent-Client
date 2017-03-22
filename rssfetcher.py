@@ -21,9 +21,6 @@
 # List of url feeds to be parsed. This entry is just an _example_. Please
 # do not download illegal torrents or torrents that you do not have permisson
 # to own.
-DOWNLOAD_DIR = "/tmp/torrents/"
-TIMESTAMP    = "/tmp/rsstorrent.stamp"
-VERBOSE      = True
 
 import feedparser
 import pickle
