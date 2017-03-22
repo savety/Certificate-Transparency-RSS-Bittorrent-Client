@@ -1,5 +1,5 @@
 # Certificate-Transparency-RSS-Bittorrent-Client
-A simple RSS client to fetch last Certificate Transparency Logs from X-Cli project.
+A simple RSS client to fetch last Certificate Transparency Logs from [X-Cli project](https://github.com/X-Cli/ATBTCT).
 
 ## Requirements 
 You need to have the transmission daemon running. You can install it by:
