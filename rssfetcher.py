@@ -21,13 +21,10 @@
 # List of url feeds to be parsed. This entry is just an _example_. Please
 # do not download illegal torrents or torrents that you do not have permisson
 # to own.
-
-	
-DOWNLOAD_DIR = "/tmp/torrents/"
-TIMESTAMP    = "/tmp/rsstorrent.stamp"
+DOWNLOAD_DIR = "/home/jamie/downloads/torrents/"
+TIMESTAMP    = "/home/jamie/downloads/rsstorrent.stamp"
 VERBOSE      = True
 
-from xclifeeds import *
 import feedparser
 import pickle
 import os
@@ -57,67 +54,11 @@ def download(url):
 # Build up a list of torrents to check
 for feed_url in FEEDS: 
     feed = feedparser.parse(feed_url)
-
-    # Valid feed ?
     if feed["bozo"] != 1:
-        for item in feed["items"]:
-            items.append((item["date_parsed"], item))
+        for item in feed["entries"]:
+            url=item["links"][0]["href"]
+			print "New URL detected: "+str(url)
+			try:
+				download(url.encode('unicode_escape'))
     else:
-        if VERBOSE:    
-            print "bad feed: " + feed_url
-            
-        feed_bad = True
-
-timestamp_file = " "
-
-# Just default to now in case there is no stamp file
-last_check_date = datetime.today()
-
-# Check to read the stamp file to see when we last checked for new torrents
-try:
-    timestamp_file = open(TIMESTAMP, 'r')
-except IOError:
-    if VERBOSE:
-        print "Cannot open stamp file %s" % TIMESTAMP
-
-if timestamp_file != " ":
-    try:
-        last_check_date = pickle.load(timestamp_file)
-    except EOFError:
-        if VERBOSE:
-            print "Stamp file %s is empty" % TIMESTAMP
-
-# Sort by date
-items.sort();
-
-downloaded_torrent = False
-
-for item in items:
-   # check for new items
-    id = item[0]
-    item_date = datetime(id[0], id[1], id[2], id[3], id[4])
-
-    if item_date > last_check_date:
-        if VERBOSE:
-            print "downloading: " + item[1]["link"] 
-            print "    and saving to: %s" % DOWNLOAD_DIR
-   
-        download(item[1]["link"].encode('unicode_escape'))
-        downloaded_torrent = True
-
-if downloaded_torrent == False:
-    if VERBOSE:
-        print "No new torrents to download"
-
-if not feed_bad and len(items) > 0:
-   # stamp the timestamp file
-    try:
-        timestamp_file = open(TIMESTAMP, 'w')
-        last_item = items[len(items)-1][0]
-        last_item_date = datetime(last_item[0], last_item[1], last_item[2], last_item[3], last_item[4])
-        pickle.dump(last_item_date, timestamp_file)
-
-    except IOError:
-        if VERBOSE:
-            print "Cannot stamp file %s" % TIMESTAMP
-
+		print "bad feed: " + feed_url
