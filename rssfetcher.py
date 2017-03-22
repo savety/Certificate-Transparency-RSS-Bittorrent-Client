@@ -21,8 +21,8 @@
 # List of url feeds to be parsed. This entry is just an _example_. Please
 # do not download illegal torrents or torrents that you do not have permisson
 # to own.
-DOWNLOAD_DIR = "/home/jamie/downloads/torrents/"
-TIMESTAMP    = "/home/jamie/downloads/rsstorrent.stamp"
+DOWNLOAD_DIR = "/tmp/torrents/"
+TIMESTAMP    = "/tmp/rsstorrent.stamp"
 VERBOSE      = True
 
 import feedparser
@@ -30,6 +30,7 @@ import pickle
 import os
 import urllib2
 from datetime import datetime 
+from xclifeeds import *
 
 items = []
 feed_bad = False
@@ -60,7 +61,7 @@ for feed_url in FEEDS:
 			print "New URL detected: "+str(url)
 			try:
 				download(url.encode('unicode_escape'))
-	except:
-		print "Something failed"
+			except:
+				print "Something failed"
 	else:
 		print "bad feed: " + feed_url
