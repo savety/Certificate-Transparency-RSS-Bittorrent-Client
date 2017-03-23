@@ -15,8 +15,8 @@ This can be modified according to your transmission configuration in the setup.p
 ```sh
 mkdir /tmp/torrents
 mkdir /incomplete-torrents
- git clone https://github.com/savety/Certificate-Transparency-RSS-Bittorrent-Client.git
- cd Certificate-Transparency-RSS-Bittorrent-Client
- python rssfetcher.py
- . asktorrent.sh
- ```
+git clone https://github.com/savety/Certificate-Transparency-RSS-Bittorrent-Client.git
+cd Certificate-Transparency-RSS-Bittorrent-Client
+python rssfetcher.py
+. asktorrent.sh
+```
