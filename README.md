@@ -20,3 +20,13 @@ cd Certificate-Transparency-RSS-Bittorrent-Client
 python rssfetcher.py
 . asktorrent.sh
 ```
+
+## Get New Torrents 
+The simplest way to get new torrents and to process them is to run the script refreshtorrents.sh
+```sh
+. refreshtorrents.sh
+```
+You can also put the execution in a Crontab
+```sh
+30 2 * * *  . ~/Certificate-Transparency-RSS-Bittorrent-Client/refreshtorrents.sh
+```
