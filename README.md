@@ -30,3 +30,8 @@ You can also put the execution in a Crontab
 ```sh
 30 2 * * *  . ~/Certificate-Transparency-RSS-Bittorrent-Client/refreshtorrents.sh
 ```
+or to add it directly 
+```sh
+cd ~/Certificate-Transparency-RSS-Bittorrent-Client
+crontab cron
+```
